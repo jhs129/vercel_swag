@@ -9,6 +9,8 @@ const promos = [
   '✨ Members get early access to limited edition drops',
 ];
 
+const ROTATION_INTERVAL_MS = 4000;
+
 export default function PromoBanner() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -20,7 +22,7 @@ export default function PromoBanner() {
         setIndex((i) => (i + 1) % promos.length);
         setVisible(true);
       }, 300);
-    }, 4000);
+    }, ROTATION_INTERVAL_MS);
     return () => clearInterval(interval);
   }, []);
 

@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { Cart } from '@/lib/cart';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 
+const FREE_SHIPPING_THRESHOLD = 50;
+const STANDARD_SHIPPING_COST = 9.99;
+
 export default function CartPage() {
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(true);
@@ -155,18 +158,18 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between text-gray-400">
                 <span>Shipping</span>
-                <span>{total >= 50 ? 'Free' : '$9.99'}</span>
+                <span>{total >= FREE_SHIPPING_THRESHOLD ? 'Free' : `$${STANDARD_SHIPPING_COST.toFixed(2)}`}</span>
               </div>
-              {total < 50 && (
+              {total < FREE_SHIPPING_THRESHOLD && (
                 <p className="text-xs text-yellow-500">
-                  Add ${(50 - total).toFixed(2)} more for free shipping
+                  Add ${(FREE_SHIPPING_THRESHOLD - total).toFixed(2)} more for free shipping
                 </p>
               )}
             </div>
             <div className="border-t border-gray-700 pt-4 mb-6">
               <div className="flex justify-between text-white font-bold text-lg">
                 <span>Total</span>
-                <span>${(total + (total >= 50 ? 0 : 9.99)).toFixed(2)}</span>
+                <span>${(total + (total >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING_COST)).toFixed(2)}</span>
               </div>
             </div>
             <button className="w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-200 transition-colors">

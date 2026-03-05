@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 import { ShoppingCartIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
+const MAX_CART_COUNT_DISPLAY = 9;
+
 export default function Navigation() {
   const [cartCount, setCartCount] = useState(0);
 
@@ -64,7 +66,7 @@ export default function Navigation() {
               <ShoppingCartIcon className="w-5 h-5" />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-white text-black text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                  {cartCount > 9 ? '9+' : cartCount}
+                  {cartCount > MAX_CART_COUNT_DISPLAY ? `${MAX_CART_COUNT_DISPLAY}+` : cartCount}
                 </span>
               )}
             </Link>

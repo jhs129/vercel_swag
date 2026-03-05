@@ -3,7 +3,9 @@ import { Cart, CartItem, parseCartFromCookie } from '@/lib/cart';
 import { products } from '@/lib/products';
 
 const CART_COOKIE = 'vercel_swag_cart';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
+const SECONDS_IN_DAY = 86400;
+const CART_COOKIE_DAYS = 7;
+const COOKIE_MAX_AGE = SECONDS_IN_DAY * CART_COOKIE_DAYS;
 
 function getCart(request: NextRequest): Cart {
   const cookie = request.cookies.get(CART_COOKIE)?.value;
